@@ -13,6 +13,9 @@ export const APP: AlphaAppConfig = {
   // Couleur d'identité du site : toute la base s'y adapte.
   accent: '#E2725B',
 
+  // Pictogramme de l'application, affiché dans la barre et le registre.
+  icon: '🎙️',
+
   // Adresses publiques (sous-domaine + chemin sur alphabette.fr).
   subdomain: 'echo',
   homePath: '/echo',

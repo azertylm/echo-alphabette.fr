@@ -1,0 +1,474 @@
+/* =========================================================================
+   ÉCHO — habillage de l'application.
+
+   Toutes les couleurs d'interface dérivent de --ab-accent (la couleur
+   d'identité du site, réglée dans src/alphabette.app.ts) et des variables
+   --ab-* de la base commune. Aucune couleur d'interface en dur : les palettes
+   affichées dans une signature sont du CONTENU (la réponse faite à
+   l'utilisateur), pas de l'habillage.
+   ========================================================================= */
+
+.ec-page {
+  max-width: 940px;
+  margin: 0 auto;
+  padding-bottom: 2rem;
+  color: var(--ab-ink);
+}
+
+.ec-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ab-accent);
+  margin-bottom: 0.7rem;
+}
+
+.ec-titre {
+  font-size: clamp(1.45rem, 3.4vw, 2rem);
+  line-height: 1.2;
+  font-weight: 850;
+  margin: 0 0 0.6rem;
+  max-width: 34ch;
+}
+.ec-titre em {
+  font-style: normal;
+  color: var(--ab-accent);
+}
+
+.ec-sous {
+  color: var(--ab-muted);
+  line-height: 1.65;
+  margin: 0 0 1.6rem;
+  max-width: 62ch;
+}
+
+/* ------------------------------ Scène d'écoute -------------------------- */
+
+.ec-scene {
+  position: relative;
+  border: 1px solid var(--ab-border);
+  background: var(--ab-surface);
+  border-radius: 22px;
+  padding: 2.1rem 1.4rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+.ec-scene::before {
+  content: '';
+  position: absolute;
+  inset: -40% 20% auto;
+  height: 260px;
+  background: radial-gradient(closest-side, color-mix(in oklab, var(--ab-accent) 26%, transparent), transparent);
+  pointer-events: none;
+  opacity: 0.75;
+}
+
+.ec-micro {
+  position: relative;
+  z-index: 1;
+  width: 8.4rem;
+  height: 8.4rem;
+  border-radius: 50%;
+  border: 0;
+  cursor: pointer;
+  color: #fff;
+  background: linear-gradient(160deg, var(--ab-accent), color-mix(in oklab, var(--ab-accent) 62%, #000));
+  box-shadow: 0 18px 40px -18px color-mix(in oklab, var(--ab-accent) 80%, transparent);
+  display: grid;
+  place-items: center;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.ec-micro:hover { transform: translateY(-2px) scale(1.02); }
+.ec-micro:active { transform: scale(0.98); }
+.ec-micro:focus-visible { outline: 3px solid color-mix(in oklab, var(--ab-accent) 45%, #fff); outline-offset: 5px; }
+.ec-micro--ecoute { background: linear-gradient(160deg, var(--ab-accent), color-mix(in oklab, var(--ab-accent) 45%, #000)); }
+
+.ec-micro__halo {
+  position: absolute;
+  inset: -0.9rem;
+  border-radius: 50%;
+  border: 2px solid color-mix(in oklab, var(--ab-accent) 55%, transparent);
+  animation: ec-pouls 1.9s ease-out infinite;
+  pointer-events: none;
+}
+.ec-micro__halo--2 { animation-delay: 0.95s; }
+
+@keyframes ec-pouls {
+  0% { transform: scale(0.92); opacity: 0.9; }
+  100% { transform: scale(1.35); opacity: 0; }
+}
+
+.ec-scene__invite {
+  margin: 1.3rem 0 0.2rem;
+  font-size: 1.02rem;
+  font-weight: 700;
+  text-align: center;
+}
+.ec-scene__aide {
+  margin: 0;
+  color: var(--ab-muted);
+  font-size: 0.86rem;
+  text-align: center;
+  max-width: 44ch;
+}
+
+.ec-ondes {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  height: 62px;
+  margin: 1.1rem 0 0.2rem;
+  width: 100%;
+}
+.ec-onde {
+  flex: 1 1 auto;
+  max-width: 8px;
+  min-height: 3px;
+  border-radius: 3px;
+  background: color-mix(in oklab, var(--ab-accent) 70%, var(--ab-border));
+  transition: height 0.09s linear;
+}
+
+.ec-chrono {
+  font-variant-numeric: tabular-nums;
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: var(--ab-muted);
+  letter-spacing: 0.05em;
+}
+.ec-chrono b { color: var(--ab-ink); }
+
+.ec-dit {
+  margin: 0.85rem 0 0;
+  font-style: italic;
+  color: var(--ab-ink);
+  font-size: 0.92rem;
+  text-align: center;
+  min-height: 1.4rem;
+  max-width: 52ch;
+  opacity: 0.85;
+}
+
+.ec-etapes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 0.7rem;
+  margin-top: 1.3rem;
+  width: 100%;
+}
+.ec-etape {
+  border: 1px solid var(--ab-border);
+  background: var(--ab-chip);
+  border-radius: 14px;
+  padding: 0.75rem 0.9rem;
+  font-size: 0.84rem;
+  color: var(--ab-muted);
+}
+.ec-etape b {
+  display: block;
+  color: var(--ab-ink);
+  font-size: 0.82rem;
+  margin-bottom: 0.15rem;
+}
+
+.ec-erreur {
+  margin-top: 1rem;
+  border: 1px solid color-mix(in oklab, #ea580c 45%, var(--ab-border));
+  background: color-mix(in oklab, #ea580c 12%, var(--ab-surface));
+  color: var(--ab-ink);
+  border-radius: 12px;
+  padding: 0.7rem 0.9rem;
+  font-size: 0.86rem;
+  width: 100%;
+}
+
+/* ------------------------------ Analyse --------------------------------- */
+
+.ec-analyse {
+  border: 1px solid var(--ab-border);
+  background: var(--ab-surface);
+  border-radius: 22px;
+  padding: 2rem 1.4rem;
+  text-align: center;
+}
+.ec-analyse__rond {
+  width: 3.2rem;
+  height: 3.2rem;
+  margin: 0 auto 1.1rem;
+  border-radius: 50%;
+  border: 3px solid color-mix(in oklab, var(--ab-accent) 28%, var(--ab-border));
+  border-top-color: var(--ab-accent);
+  animation: ec-tourne 1s linear infinite;
+}
+@keyframes ec-tourne { to { transform: rotate(360deg); } }
+
+.ec-analyse__lignes {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.45rem;
+  color: var(--ab-muted);
+  font-size: 0.9rem;
+}
+.ec-analyse__lignes li {
+  opacity: 0;
+  animation: ec-apparait 0.5s ease forwards;
+}
+.ec-analyse__lignes li::before { content: '— '; }
+
+@keyframes ec-apparait {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ------------------------------ Signature ------------------------------- */
+
+.ec-signature {
+  border: 1px solid var(--ab-border);
+  background: var(--ab-surface);
+  border-radius: 22px;
+  overflow: hidden;
+  animation: ec-apparait 0.45s ease both;
+}
+
+.ec-signature__tete {
+  padding: 1.5rem 1.4rem 1.2rem;
+  background: linear-gradient(180deg, color-mix(in oklab, var(--ab-accent) 16%, transparent), transparent);
+  border-bottom: 1px solid var(--ab-border);
+}
+.ec-signature__nom {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: clamp(1.5rem, 4vw, 2.1rem);
+  font-weight: 850;
+  margin: 0.35rem 0 0.5rem;
+  line-height: 1.15;
+}
+.ec-signature__phrase {
+  margin: 0;
+  color: var(--ab-ink);
+  font-size: 1rem;
+  line-height: 1.65;
+  max-width: 60ch;
+  opacity: 0.92;
+}
+.ec-source {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid var(--ab-border);
+  background: var(--ab-chip);
+  color: var(--ab-muted);
+  border-radius: 999px;
+  padding: 0.18rem 0.6rem;
+}
+
+.ec-bloc { padding: 1.3rem 1.4rem; border-top: 1px solid var(--ab-border); }
+.ec-bloc:first-of-type { border-top: 0; }
+.ec-bloc__titre {
+  font-size: 0.72rem;
+  font-weight: 850;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ab-muted);
+  margin: 0 0 0.85rem;
+}
+
+.ec-palette { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.ec-teinte {
+  width: 3.6rem;
+  height: 3.6rem;
+  border-radius: 14px;
+  border: 1px solid var(--ab-border);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  font-size: 0.6rem;
+  font-weight: 800;
+  color: rgba(0, 0, 0, 0.55);
+  padding-bottom: 0.25rem;
+  letter-spacing: 0.02em;
+}
+
+.ec-planche {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.6rem;
+}
+.ec-tuile {
+  border: 1px solid var(--ab-border);
+  border-radius: 16px;
+  padding: 0.9rem 0.8rem 0.8rem;
+  min-height: 7.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: color-mix(in oklab, var(--ab-accent) 8%, var(--ab-chip));
+}
+.ec-tuile__emoji { font-size: 1.6rem; line-height: 1; }
+.ec-tuile__mot { font-weight: 750; font-size: 0.9rem; }
+
+.ec-idees { display: grid; gap: 0.55rem; }
+.ec-idee {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.75rem;
+  align-items: center;
+  border: 1px solid var(--ab-border);
+  border-radius: 14px;
+  padding: 0.7rem 0.85rem;
+  background: var(--ab-chip);
+}
+.ec-idee__type {
+  font-size: 1.05rem;
+  width: 2rem;
+  height: 2rem;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: color-mix(in oklab, var(--ab-accent) 18%, var(--ab-surface));
+}
+.ec-idee__nom { font-weight: 750; font-size: 0.93rem; }
+.ec-idee__pourquoi { color: var(--ab-muted); font-size: 0.82rem; }
+.ec-idee__lien {
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: var(--ab-accent);
+  text-decoration: none;
+  white-space: nowrap;
+  border: 1px solid color-mix(in oklab, var(--ab-accent) 40%, var(--ab-border));
+  border-radius: 999px;
+  padding: 0.32rem 0.7rem;
+}
+.ec-idee__lien:hover { background: color-mix(in oklab, var(--ab-accent) 14%, transparent); }
+
+.ec-axes { display: grid; gap: 0.55rem; }
+.ec-axe { display: grid; grid-template-columns: 6.5rem 1fr 2.4rem; align-items: center; gap: 0.6rem; font-size: 0.82rem; }
+.ec-axe__nom { color: var(--ab-muted); }
+.ec-axe__barre {
+  height: 0.5rem;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--ab-muted) 22%, transparent);
+  overflow: hidden;
+}
+.ec-axe__valeur {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, color-mix(in oklab, var(--ab-accent) 55%, transparent), var(--ab-accent));
+  transition: width 0.6s ease;
+}
+.ec-axe__chiffre { text-align: right; font-weight: 800; font-variant-numeric: tabular-nums; }
+
+.ec-indices { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.ec-indice {
+  font-size: 0.78rem;
+  border: 1px solid var(--ab-border);
+  background: var(--ab-chip);
+  border-radius: 999px;
+  padding: 0.2rem 0.6rem;
+  color: var(--ab-muted);
+}
+
+.ec-transcription { margin-top: 0.6rem; }
+.ec-transcription summary {
+  cursor: pointer;
+  font-size: 0.82rem;
+  color: var(--ab-muted);
+}
+.ec-transcription p {
+  margin: 0.6rem 0 0;
+  padding: 0.7rem 0.85rem;
+  border-left: 3px solid var(--ab-accent);
+  background: var(--ab-chip);
+  border-radius: 0 12px 12px 0;
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--ab-ink);
+}
+
+.ec-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  padding: 1.1rem 1.4rem 1.4rem;
+  border-top: 1px solid var(--ab-border);
+}
+.ec-bouton {
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+  border: 0;
+  border-radius: 12px;
+  padding: 0.6rem 1.05rem;
+  background: var(--ab-accent);
+  color: #fff;
+}
+.ec-bouton:hover { filter: brightness(1.08); }
+.ec-bouton--fantome {
+  background: transparent;
+  color: var(--ab-ink);
+  border: 1px solid var(--ab-border);
+}
+.ec-bouton--fantome:hover { background: var(--ab-chip); filter: none; }
+.ec-bouton--fait { background: #16a34a; color: #fff; }
+
+/* ------------------------------ Réglages / notes ------------------------ */
+
+.ec-note {
+  margin-top: 1.4rem;
+  border: 1px solid var(--ab-border);
+  border-radius: 16px;
+  background: var(--ab-chip);
+  padding: 0.9rem 1.05rem;
+  font-size: 0.84rem;
+  color: var(--ab-muted);
+  line-height: 1.6;
+}
+.ec-note strong { color: var(--ab-ink); }
+.ec-note details { margin-top: 0.5rem; }
+.ec-note summary { cursor: pointer; font-weight: 700; color: var(--ab-accent); }
+
+.ec-cle {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.7rem;
+}
+.ec-cle input {
+  flex: 1 1 16rem;
+  font: inherit;
+  font-size: 0.85rem;
+  padding: 0.5rem 0.7rem;
+  border-radius: 10px;
+  border: 1px solid var(--ab-border);
+  background: var(--ab-surface);
+  color: var(--ab-ink);
+}
+.ec-cle__etat { flex: 1 1 100%; font-size: 0.8rem; margin: 0; }
+
+.ec-pied {
+  text-align: center;
+  color: var(--ab-muted);
+  font-size: 0.78rem;
+  margin-top: 1.6rem;
+  line-height: 1.7;
+}
+
+@media (max-width: 520px) {
+  .ec-idee { grid-template-columns: auto 1fr; }
+  .ec-idee__lien { grid-column: 1 / -1; justify-self: start; }
+  .ec-axe { grid-template-columns: 4.8rem 1fr 2.2rem; }
+}
